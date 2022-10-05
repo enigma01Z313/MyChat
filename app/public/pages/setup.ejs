@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="jumbotron">
+    <%- include('../components/h1', {content: "MyChat"}) %> 
+    <p>Welcome to <b>MyChat</b> encrypted chat messenger</p>
+    <p>Let's setup your <b>MyChat</b> account</p>
+    <hr>
+    <article>
+      <header>
+        <h2>Windows</h2>
+      </header>
+      <div>
+        <ol>
+          <li>
+            press Ctrl+R
+          </li>
+          <li>
+            open this file location: C:\Users\{%usename%}\.ssh
+            <br>
+            <b>Point: </b>{%username%} is the name of your system username
+          </li>
+          <li>
+            create folder MyChat
+          </li>
+          <li>
+            in popup windows print: "cmd" <br>
+            <img src="assets/img/runImg.jpg" alt="">
+          </li>
+          <li>
+            in command prompt window print: "ssh-keygen" and press enter<br>
+            <img src="assets/img/cmdImg1.jpg" alt="">
+          </li>
+          <li>
+            insert your system username here
+            <input type="text" id="username">
+          </li>
+          <li>
+            paste text below and paste it in cmd and press enter
+            <input 
+              id="keygenAddr" style="width: 500px" type="text" 
+              value="C:\Users\{%username%}/.ssh/MyChat/id_rsa"><br>
+            <img src="assets/img/cmdImg2.jpg" alt="">
+          </li>
+          <li>
+            enter a password for your encryption and print enter <br>
+            <b>Point: </b> the password you type won't show up, it's Ok <br>
+            <img src="assets/img/cmdImg3.jpg" alt="">
+          </li>
+          <li>
+            enter the password again <br>
+            <b>Point: </b> the password you type won't show up, it's Ok <br>
+            <img src="assets/img/cmdImg4.jpg" alt="">
+          </li>
+          <li>
+            you'll see this <br>
+            <img src="assets/img/cmdImg5.jpg" alt="">
+          </li>
+          <li>
+            go to this location
+            <input 
+              id="sshKeyPath" style="width: 500px" type="text" 
+              value="C:\Users\{%username%}/.ssh/MyChat/id_rsa"> <br>
+              <img src="assets/img/files1.jpg" alt="">
+          </li>
+          <li>
+            open file: id_rsa.pub
+          </li>
+        </ol>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

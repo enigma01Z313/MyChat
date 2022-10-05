@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="jumbotron">
+    <%- include('../components/h1', {content: "MyChat"}) %> 
+    <p>Welcome to <b>MyChat</b> encrypted chat messenger</p>
+    <p>Let's setup your <b>MyChat</b> account</p>
+    <hr>
+    <div class="row">
+      <div class="col-lg-6">
+        <h3>Register</h3><hr>
+        <form id="registerForm" class="logRegForm" action="auth/register">
+          <label>
+            Username: 
+            <input type="text" name="username" placeholder="username">
+          </label>
+          <label>
+            Password: 
+            <input type="password" name="password" placeholder="******">
+          </label>
+          <label>
+            Retype Password: 
+            <input type="password" name="repassword" placeholder="******">
+          </label>
+          <input type="submit" value="Register">
+        </form>
+      </div>
+      <div class="col-lg-6">
+        <h3>Login</h3><hr>
+        <form id="loginForm" class="logRegForm" action="">
+          <label>
+            Username: 
+            <input type="text" name="username" placeholder="username">
+          </label>
+          <label>
+            Password: 
+            <input type="password" name="password" placeholder="******">
+          </label>
+          <input type="submit" value="Login">
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+<script src="/assets/js/main.js"></script>
+
+</body>
+</html>
