@@ -1,0 +1,50 @@
+@base = http://localhost:30000
+@baseUrl = {{base}}/api/roles
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQyYjI1NTc1LWUwZTktNDA0OC05YjRkLWYzMWIyMjM0NjdlMiIsInBob25lIjoiMDkzMzM5NTA4ODkiLCJpYXQiOjE2NTc5NTE5NDYsImV4cCI6MTY1ODA0MTk0Nn0.kaGvVbIuTTtbTBh991qvKLwpI_toBMB7hJ1_7ruP3Rs
+
+//list permissions
+GET {{baseUrl}}/permissions
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+//get list of roles
+GET {{baseUrl}}/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+//get list of roles
+GET {{baseUrl}}/?limit=2&page=2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+//add new role
+POST {{baseUrl}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "ROLE4",
+  "permissions": [
+    "ADD_ROLES", 
+    "EDIT_ROLES"
+  ]
+}
+
+###
+
+GET {{baseUrl}}/49dbebaa-8172-43dc-a1e8-1a01a8117654
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+PUT {{baseUrl}}/8b7a5d49-3584-4498-a7e8-b962d0b3be55
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "status": 0
+}

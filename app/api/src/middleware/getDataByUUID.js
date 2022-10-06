@@ -1,21 +1,45 @@
 const Models = require("../../db/models");
 const fError = require("../utils/fError");
+const { Op } = require("sequelize");
 
-const getDataByUUID = (model, modelFa) => async (req, res, next) => {
-  const { uuid } = req.params;
-  const item = await Models[model].findOne({ where: { uuid } });
+const createIncludeArray = (str) => {
+  if (!str) return { include: [] };
 
-  if (!item)
-    return next(
-      fError(
-        404,
-        `Not found: '${model}' with id '${uuid}' does not exist`,
-        `یافت نشد: ${modelFa} با ${uuid} وجود ندارد`
-      )
-    );
-
-  res.jsonData = item;
-  next();
+  return {
+    include: str.split(",").map((item) => Models[item]),
+  };
 };
+
+const getDataByUUID =
+  (model, modelFa, includeModels, translatable = false) =>
+  async (req, res, next) => {
+    const { uuid } = req.params;
+    const { setLang } = res;
+
+    const andCOnditions = [{ uuid }];
+
+    if (translatable)
+      andCOnditions.push({ [`$${model}Translations.lang$`]: setLang });
+
+    const item = await Models[model].findOne({
+      where: {
+        [Op.and]: andCOnditions,
+      },
+      ...createIncludeArray(includeModels),
+      subQuery: false,
+    });
+
+    if (!item)
+      return next(
+        fError(
+          404,
+          `Not found: '${model}' with id '${uuid}' does not exist`,
+          `یافت نشد: ${modelFa} با ${uuid} وجود ندارد`
+        )
+      );
+
+    res.jsonData = item;
+    next();
+  };
 
 module.exports = getDataByUUID;

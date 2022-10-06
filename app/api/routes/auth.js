@@ -11,7 +11,7 @@ const {
   authornticate,
   oneTimeLogin,
   oneTimeConfirm,
-} = require("../src/services/auth");
+} = require("../src/services");
 
 /**************************/
 /*   validation schemas   */
@@ -29,9 +29,11 @@ const registerSchema = new ValidateF()
   .done();
 
 const loginSchema = new ValidateF()
-  .phoneSchema()
+  .param("username", "نام کاربری")
+  .requiredString()
   .param("password", "رمز عبور")
   .required()
+  .minimum(6)
   .done();
 
 const phoneSchema = new ValidateF().phoneSchema().done();

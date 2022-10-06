@@ -1,13 +1,22 @@
+"use strict";
+
+const fs = require("fs");
+const path = require("path");
+const basename = path.basename(__filename);
 const express = require("express");
 const router = express.Router();
 
-const authRouter = require("./auth");
-router.use("/auth", authRouter);
+fs.readdirSync(__dirname)
+  .filter(
+    (file) =>
+      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
+  )
+  .forEach((file) => {
+    // console.log(path.join(__dirname, file));
+    const routerItem = require(path.join(__dirname, file));
+    const routerPath = file.split(".");
 
-const roleRouter = require("./role");
-router.use("/roles", roleRouter);
-
-// const userRouter = require("./user");
-// router.use("/users", userRouter);
+    router.use(`/${routerPath[0]}`, routerItem);
+  });
 
 module.exports = router;

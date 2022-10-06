@@ -3,6 +3,7 @@
 <head>
   <%- include('../partials/head'); %>
 </head>
+<%- include('../partials/loginCheck'); %>
 <body class="container">
 
 <header>
@@ -11,7 +12,7 @@
 
 <main>
   <div class="jumbotron">
-    <%- include('../components/h1', {content: "MyChat"}) %> 
+    <%- include('../components/h1', {content: "MyChat Setup"}) %> 
     <p>Welcome to <b>MyChat</b> encrypted chat messenger</p>
     <p>Let's setup your <b>MyChat</b> account</p>
     <hr>
@@ -73,7 +74,12 @@
               <img src="assets/img/files1.jpg" alt="">
           </li>
           <li>
-            open file: id_rsa.pub
+            open file: id_rsa.pub and paste file contents header
+            <form id="updatePublicLock" action=''>
+              <textarea name="publicLock" id="publicLock" style="width: 100%;"></textarea>
+              <input type="submit" value="Update User">
+            </form>
+            
           </li>
         </ol>
       </div>
@@ -81,6 +87,7 @@
   </div>
 </main>
 
+<script src="/assets/js/setup.js"></script>
 <footer>
   <%- include('../partials/footer'); %>
 </footer>

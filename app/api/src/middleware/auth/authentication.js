@@ -10,9 +10,10 @@ const authentication = async (req, res, next) => {
     return next(fError(401, "Authorization not sent", "خطای اطلاعات ارسالی"));
 
   const user = await User.findOne({
-    where: { accessToken: authorization },
+    where: { accessToken: authorization.split(" ")[1] },
     include: Role,
   });
+
   if (!user)
     return next(fError(403, "Token not valid", "توکن نا معتبر میباشد"));
 

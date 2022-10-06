@@ -1,9 +1,12 @@
 const fError = require("../../utils/fError");
 
 const authorizationDef = (permission) => async (req, res, next) => {
-  const { authenticatedUser: user } = res;
+  const {
+    authenticatedUser: { permissions: grantedPermissions },
+    theSameUser,
+  } = res;
 
-  const { permissions: grantedPermissions } = user;
+  if (theSameUser) return next();
 
   if (!grantedPermissions.includes(permission))
     return next(
@@ -18,8 +21,12 @@ const authorizationDef = (permission) => async (req, res, next) => {
 };
 
 const authorizationAnd = (permissions) => async (req, res, next) => {
-  const { authenticatedUser: user } = res;
-  const { permissions: grantedPermissions } = user;
+  const {
+    authenticatedUser: { permissions: grantedPermissions },
+    theSameUser,
+  } = res;
+
+  if (theSameUser) return next();
 
   for (permission of permissions)
     if (!grantedPermissions.includes(permission))
@@ -37,8 +44,12 @@ const authorizationAnd = (permissions) => async (req, res, next) => {
 };
 
 const authorizationOr = (permissions) => async (req, res, next) => {
-  const { authenticatedUser: user } = res;
-  const { permissions: grantedPermissions } = user;
+  const {
+    authenticatedUser: { permissions: grantedPermissions },
+    theSameUser,
+  } = res;
+
+  if (theSameUser) return next();
 
   for (permission of permissions)
     if (grantedPermissions.includes(permission)) return next();

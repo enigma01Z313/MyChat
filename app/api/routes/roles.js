@@ -10,57 +10,11 @@ const isUnique = require("../src/middleware/isUnique");
 const getDataByUUID = require("../src/middleware/getDataByUUID");
 const validatePermissions = require("../src/middleware/validatePermissions");
 const filteredData = require("../src/middleware/filteredData");
+const getDataList = require("../src/middleware/getDataList");
 
-const testD = {
-  status: {
-    code: 1,
-    label: "فعال",
-    color: "greed",
-  },
-  id: "71485d73-5ccf-4b40-a19b-2a4fc7daec55",
-  name: "role 13",
-  permissions: ["SEE_ROLES", "ADD_ROLES"],
-  updatedAt: "2022-04-01T09:40:59.225Z",
-  createdAt: "2022-04-01T09:40:59.225Z",
-};
-const testD2 = {
-  data: [
-    {
-      id: "9ad28da3-da30-4853-99b1-88d9e8ff3b6d",
-      name: "role 11",
-      permissions: ["SEE_ROLES", "ADD_ROLES"],
-      status: {
-        code: 0,
-        label: "غیر فعال",
-        color: "red",
-      },
-      createdAt: "2022-03-26T08:56:29.000Z",
-      updatedAt: "2022-03-26T11:25:46.000Z",
-    },
-    // {
-    //   id: "94488559-dd9b-4406-9e4f-ab1347c6f09f",
-    //   name: "role 2",
-    //   permissions: ["SEE_ROLES", "ADD_ROLES"],
-    //   status: {
-    //     code: 0,
-    //     label: "غیر فعال",
-    //     color: "red",
-    //   },
-    //   createdAt: "2022-03-26T09:11:21.000Z",
-    //   updatedAt: "2022-03-28T15:25:55.000Z",
-    // },
-  ],
-  total: 3,
-};
-const validation = require("../src/middleware/validate/validatorFunction");
-const { roleSchema, rolesListSchema } = require("../src/utils/schema");
+const { roleSchema } = require("../src/utils/schema");
 
-const {
-  listPermissions,
-  addRole,
-  getRoles,
-  updateRole,
-} = require("../src/services/role");
+const { listPermissions, addRole, updateRole } = require("../src/services");
 
 /**************************/
 /*   validation schemas   */
@@ -107,9 +61,8 @@ router.get(
   "/",
   use(authentication),
   use(authorization.def("SEE_ROLES")),
-  (req, res) => {return res.end('12')},
   filteredData({ id: { [Op.ne]: 1 } }),
-  use(getRoles),
+  use(getDataList("Role", "نقش کاربری")),
   serveJson
 );
 

@@ -36,7 +36,7 @@
       </div>
       <div class="col-lg-6">
         <h3>Login</h3><hr>
-        <form id="loginForm" class="logRegForm" action="">
+        <form id="loginForm" class="logRegForm" action="auth/login">
           <label>
             Username: 
             <input type="text" name="username" placeholder="username">
@@ -44,6 +44,10 @@
           <label>
             Password: 
             <input type="password" name="password" placeholder="******">
+          </label>
+          <label>
+            Key:
+            <textarea name="key" id="key" style="width: 100%;"></textarea>
           </label>
           <input type="submit" value="Login">
         </form>

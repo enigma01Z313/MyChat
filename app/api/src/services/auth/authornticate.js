@@ -4,10 +4,10 @@ const fError = require("../../utils/fError");
 const createJWT = require("../../utils/createJWT");
 
 const login = async (req, res, next) => {
-  const { phone, password } = req.body;
+  const { username, password } = req.body;
 
   const user = await User.findOne({
-    where: { phone, password: hash(password) },
+    where: { username, password: hash(password) },
     include: Role,
   });
   if (!user)

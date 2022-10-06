@@ -24,4 +24,27 @@ body{
       justify-content: space-between;
     }
   }
+
+  #searchIds{
+    display: flex;
+
+    input[type="text"]{
+      flex-grow: 1
+    }
+  }
+
+  #chatterSection{
+    background: #fff;
+    padding: 15px;
+
+    footer{
+      form{
+        display: flex;
+  
+        input[type="text"]{
+          flex-grow: 1
+        }
+      }
+    }
+  }
 }

@@ -17,7 +17,7 @@ module.exports = {
         {
           uuid: uuidv4(),
           name: "USER",
-          permissions: `["CHATTER"]`,
+          permissions: `["CHATTER", "SEE_USERS"]`,
           status: 1,
           createdAt: new Date(),
           updatedAt: new Date(),

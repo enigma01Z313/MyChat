@@ -1,0 +1,22 @@
+@base = http://localhost:30000
+@baseUrl = {{base}}/api/auth
+
+
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{
+  "username": "fff",
+  "password": "123123",
+  "repassword": "123123"
+}
+
+###
+
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "username": "f",
+  "password": "123123"
+}
