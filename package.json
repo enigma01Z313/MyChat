@@ -23,7 +23,9 @@
     "mongoose": "^6.2.0",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.16.3"
+    "sequelize": "^6.16.3",
+    "socket.io": "^4.5.2",
+    "tunnel-ssh": "^4.1.6"
   },
   "devDependencies": {
     "jest": "^27.5.1",

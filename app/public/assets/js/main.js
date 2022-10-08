@@ -1,7 +1,5 @@
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
-const searchIds = document.getElementById("searchIds");
-const sendMessage = document.getElementById("sendMessage");
 
 registerForm &&
   registerForm.addEventListener("submit", async function (e) {
@@ -71,50 +69,4 @@ loginForm &&
         window.location.replace(`http://localhost:30000/chats`);
       }
     );
-  });
-
-searchIds &&
-  searchIds.addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const convesationTarget = searchIds.querySelector("[type='text']").value;
-
-    const url = `${apiUrl}/users/${convesationTarget}`;
-    const method = "GET";
-    const data = {
-      convesationTarget,
-    };
-
-    const options = {
-      url,
-      method,
-      headers: {
-        ...defaultHeaders,
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-      data,
-    };
-
-    doRequest(options, (response) => {
-      const { data } = response;
-      const receiver =
-        data.fullName && data.fullName.trim() !== ""
-          ? data.fullName
-          : data.username;
-
-      document
-        .getElementById("chatterSection")
-        .querySelector("header").innerText = `You are messaging ${receiver}`;
-      localStorage.setItem("receiverLock", data.publicLock);
-    });
-  });
-
-sendMessage &&
-  sendMessage.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const message = sendMessage.querySelector('[type="text"]').value;
-    const receiverLock = localStorage.getItem("receiverLock");
-
-    console.log(receiverLock);
-    console.log(message);
   });

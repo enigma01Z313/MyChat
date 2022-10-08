@@ -1,4 +1,4 @@
-const { Role } = require("../../../db/models");
+const { Role } = require("../../../db/mysql/models");
 
 const addRole = async (req, res, next) => {
   const { name, permissions } = req.body;

@@ -1,4 +1,4 @@
-const { User, Role } = require("../../../db/models");
+const { User, Role } = require("../../../db/mysql/models");
 const fError = require("../../utils/fError");
 
 const userById = async (req, res, next) => {

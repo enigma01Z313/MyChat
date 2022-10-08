@@ -1,4 +1,4 @@
-const { User, Role } = require("../../../db/models");
+const { User, Role } = require("../../../db/mysql/models");
 const hash = require("../../utils/hash");
 const fError = require("../../utils/fError");
 const createJWT = require("../../utils/createJWT");

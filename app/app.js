@@ -5,6 +5,9 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const mysql = require("mysql2");
 const { dbName, dbHost, dbUser, dbPass } = require("../config/dbMysql");
+const connectToMongo = require("./api/db/mongoDb/connect");
+
+connectToMongo();
 
 //mysql database conncetion
 const mysqlDB = mysql.createConnection({
@@ -16,16 +19,6 @@ mysqlDB.connect(function (err) {
   if (err) throw err;
   console.log("mysql Connected!");
 });
-// const mongoose = require("mongoose");
-// const { dbUrl } = require("../config/dbMysql");
-// console.log(dbUrl);
-// mongoose.connect(dbUrl);
-// const db = mongoose.connection;
-// db.on("error", (err) => {
-//   console.log("DATABASE ERROR:");
-//   console.log(err);
-// });
-// db.once("open", () => console.log("Database connected"));
 
 const apiRouter = require("./api/routes");
 const staticRouter = require("./public/router");

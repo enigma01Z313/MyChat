@@ -1,4 +1,4 @@
-const { User } = require("../../../db/models");
+const { User } = require("../../../db/mysql/models");
 const fError = require("../../utils/fError");
 const setOnetimePassword = require("../../utils/logic/setOnetimePassword");
 

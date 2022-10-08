@@ -1,7 +1,7 @@
 "use strict";
 const { v4: uuidv4 } = require("uuid");
 const crypto = require("crypto");
-const { hashSecret } = require("../../../../config/hachConfig");
+const { hashSecret } = require("../../../../../config/hachConfig");
 
 const password = "e10659603e1219ad9ab5b55794977be4c5a021b234aaa8629fe0ab780807e77a";
 
