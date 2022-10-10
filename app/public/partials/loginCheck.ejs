@@ -3,7 +3,6 @@
   const loggedUser = JSON.parse( localStorage.getItem('userData') )
   const {status: {code}, publicLock} = loggedUser
 
-  console.log(loggedUser);
   if(
     window.location.href !== 'http://localhost:30000/setup' && 
     (code === 0 || publicLock === null))

@@ -21,72 +21,32 @@
         <h2>Windows</h2>
       </header>
       <div>
-        <ol>
-          <li>
-            press Ctrl+R
-          </li>
-          <li>
-            open this file location: C:\Users\{%usename%}\.ssh
-            <br>
-            <b>Point: </b>{%username%} is the name of your system username
-          </li>
-          <li>
-            create folder MyChat
-          </li>
-          <li>
-            in popup windows print: "cmd" <br>
-            <img src="assets/img/runImg.jpg" alt="">
-          </li>
-          <li>
-            in command prompt window print: "ssh-keygen" and press enter<br>
-            <img src="assets/img/cmdImg1.jpg" alt="">
-          </li>
-          <li>
-            insert your system username here
-            <input type="text" id="username">
-          </li>
-          <li>
-            paste text below and paste it in cmd and press enter
-            <input 
-              id="keygenAddr" style="width: 500px" type="text" 
-              value="C:\Users\{%username%}/.ssh/MyChat/id_rsa"><br>
-            <img src="assets/img/cmdImg2.jpg" alt="">
-          </li>
-          <li>
-            enter a password for your encryption and print enter <br>
-            <b>Point: </b> the password you type won't show up, it's Ok <br>
-            <img src="assets/img/cmdImg3.jpg" alt="">
-          </li>
-          <li>
-            enter the password again <br>
-            <b>Point: </b> the password you type won't show up, it's Ok <br>
-            <img src="assets/img/cmdImg4.jpg" alt="">
-          </li>
-          <li>
-            you'll see this <br>
-            <img src="assets/img/cmdImg5.jpg" alt="">
-          </li>
-          <li>
-            go to this location
-            <input 
-              id="sshKeyPath" style="width: 500px" type="text" 
-              value="C:\Users\{%username%}/.ssh/MyChat/id_rsa"> <br>
-              <img src="assets/img/files1.jpg" alt="">
-          </li>
-          <li>
-            open file: id_rsa.pub and paste file contents header
-            <form id="updatePublicLock" action=''>
-              <textarea name="publicLock" id="publicLock" style="width: 100%;"></textarea>
-              <input type="submit" value="Update User">
-            </form>
-            
-          </li>
-        </ol>
+        
+        <button id="resetPairKey">Reset code</button>
+        <form id="updatePublicLock" action=''>
+          <ol>
+            <li>
+              <label style="width: 100%;">
+                Public Key:
+                <textarea name="publicLock" id="publicLock" style="width: 100%;"></textarea>
+              </label>
+            </li>
+            <li>
+              <label style="width: 100%;">
+                Private Key:
+                <textarea name="privateKey" id="privateKey" style="width: 100%;"></textarea>
+              </label>
+            </li>
+          </ol>
+          <input type="submit" value="Update User">
+        </form>
       </div>
     </article>
   </div>
 </main>
 
+<script src="/assets/js/inc/funcs.js"></script>
+<script src="/assets/js/inc/cipher.js"></script>
 <script src="/assets/js/setup.js"></script>
 <footer>
   <%- include('../partials/footer'); %>

@@ -1,7 +1,7 @@
 const http = require("http");
 const app = require("./app/app");
 const socketio = require("socket.io");
-const socketServices = require('./app/socket')
+const socketServices = require("./app/socket");
 
 const port = process.env.PORT ?? 30000;
 
@@ -15,3 +15,20 @@ const host = "http://localhost";
 server.listen(port, () => {
   console.log(`Api server is running on: ${host}:${port}`);
 });
+
+const crypto = require("crypto");
+const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {
+  modulusLength: 2048,
+});
+
+const lock = publicKey.export({
+  type: "pkcs1",
+  format: "pem",
+});
+
+const key = privateKey.export({
+  type: "pkcs1",
+  format: "pem",
+});
+
+// console.log(lock, key);

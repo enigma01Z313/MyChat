@@ -30,8 +30,6 @@ searchIds &&
     doRequest(options, (response) => {
       const { data } = response;
 
-      console.log(data);
-
       document
         .getElementById("chatterSection")
         .querySelector("header").innerText = `You are messaging ${data.title}`;

@@ -61,7 +61,6 @@ loginForm &&
     doRequest(
       options,
       ({ data: { accessToken, refreshToken, user, goto } }) => {
-        console.log("logged in");
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         localStorage.setItem("userData", JSON.stringify(user));
