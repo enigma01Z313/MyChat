@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const MainSchema = require("./_main");
 
+const Message = require("./Message");
+
 const participents = {
   type: [
     {
@@ -26,31 +28,6 @@ const participents = {
   required: true,
 };
 
-const messages = {
-  type: [
-    {
-      _id: {
-        type: String,
-        required: true,
-      },
-      text: {
-        type: String,
-        required: true,
-      },
-      sender: {
-        type: String,
-        required: true,
-      },
-      isReqplyTo: String,
-      isEditted: Boolean,
-      time: {
-        type: Date,
-        required: true,
-      },
-    },
-  ],
-};
-
 const conversationSchema = new MainSchema({
   isGroup: {
     type: Boolean,
@@ -58,7 +35,7 @@ const conversationSchema = new MainSchema({
     default: false,
   },
   participents,
-  messages,
+  messages: [{ type: Message }],
 });
 
 module.exports = mongoose.model("Conversation", conversationSchema);

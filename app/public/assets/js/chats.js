@@ -47,7 +47,7 @@ sendMessage &&
     const message = sendMessage.querySelector('[type="text"]').value;
     const participents = JSON.parse(localStorage.getItem("participents"));
 
-    const messages = [];
+    const messages = {};
     for (const participent of participents) {
       const pId = participent.uuid;
       const pLock = a2b64(participent.publicLock);
@@ -58,9 +58,10 @@ sendMessage &&
       messages[pId] = b2a64(encryptedMessage);
     }
 
+    const isReplyTo = "";
     const url = `${apiUrl}/conversations/${convesationId}`;
     const method = "POST";
-    const data = messages;
+    const data = { messages, isReplyTo };
 
     const options = {
       url,
