@@ -42,22 +42,42 @@ sendMessage &&
   sendMessage.addEventListener("submit", async function (e) {
     e.preventDefault();
 
+    const convesationId = localStorage.getItem("conversationId");
+
     const message = sendMessage.querySelector('[type="text"]').value;
-    const participents = JSON.parse(
-      localStorage.getItem("participents")
-    ).filter((item) => item.uuid !== userId);
+    const participents = JSON.parse(localStorage.getItem("participents"));
 
     const messages = [];
     for (const participent of participents) {
       const pId = participent.uuid;
-      const pLock = participent.publicLock;
-      const encryptedMessage = 1 + pLock;
+      const pLock = a2b64(participent.publicLock);
 
-      messages[pId] = encryptedMessage;
+      const publicLock = await importedPublicKey(pLock);
+      const encryptedMessage = await encryptText(message, publicLock);
+
+      messages[pId] = b2a64(encryptedMessage);
     }
 
-    console.log(participents);
-    console.log(message);
+    const url = `${apiUrl}/conversations/${convesationId}`;
+    const method = "POST";
+    const data = messages;
+
+    const options = {
+      url,
+      method,
+      headers: {
+        ...defaultHeaders,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      data,
+    };
+
+    doRequest(options, (res) => {
+      console.log(res);
+      // if (user) localStorage.setItem("userData", JSON.stringify(user));
+      // // console.log(user);
+      // window.location.replace(`http://localhost:30000`);
+    });
   });
 
 const socket = io(siteUrl);

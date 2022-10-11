@@ -25,17 +25,19 @@
         <button id="resetPairKey">Reset code</button>
         <form id="updatePublicLock" action=''>
           <ol>
-            <li>
-              <label style="width: 100%;">
-                Public Key:
-                <textarea name="publicLock" id="publicLock" style="width: 100%;"></textarea>
-              </label>
+            <li class="keys">
+              <div>
+                <span>Public Key:</span>
+                <span class="copy" data-target="publicLock">Copy</span>
+              </div>
+              <textarea disabled name="publicLock" id="publicLock" style="width: 100%;"></textarea>
             </li>
-            <li>
-              <label style="width: 100%;">
-                Private Key:
-                <textarea name="privateKey" id="privateKey" style="width: 100%;"></textarea>
-              </label>
+            <li class="keys">
+              <div>
+                <span>Private Key:</span>
+                <span class="copy" data-target="privateKey">Copy</span>
+              </div>
+              <textarea disabled name="privateKey" id="privateKey" style="width: 100%;"></textarea>
             </li>
           </ol>
           <input type="submit" value="Update User">
@@ -47,6 +49,7 @@
 
 <script src="/assets/js/inc/funcs.js"></script>
 <script src="/assets/js/inc/cipher.js"></script>
+<script src="/assets/js/main.js"></script>
 <script src="/assets/js/setup.js"></script>
 <footer>
   <%- include('../partials/footer'); %>

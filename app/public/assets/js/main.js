@@ -69,3 +69,22 @@ loginForm &&
       }
     );
   });
+
+const copyElements = document.querySelectorAll(".copy");
+copyElements.forEach(function (item) {
+  item.addEventListener("click", function () {
+    const targetField = item.dataset.target;
+    const targetElement = document.getElementById(targetField);
+    targetElement.select();
+    targetElement.setSelectionRange(0, 99999);
+
+    navigator.clipboard.writeText(targetElement.value);
+
+    item.innerText = "Copied...";
+    item.classList.add("copied");
+    setTimeout(function () {
+      item.innerText = "Copy";
+      item.classList.remove("copied");
+    }, 1500);
+  });
+});

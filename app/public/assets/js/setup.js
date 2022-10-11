@@ -63,8 +63,8 @@ document
     };
     doRequest(options, ({ data: user }) => {
       if (user) localStorage.setItem("userData", JSON.stringify(user));
-      console.log(user);
-      // window.location.replace(`http://localhost:30000`);
+      // console.log(user);
+      window.location.replace(`http://localhost:30000`);
     });
   });
 

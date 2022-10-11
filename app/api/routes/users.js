@@ -36,7 +36,7 @@ const { updateUser, addUser } = require("../src/services");
 const updatedUserSchema = new ValidateF()
   .param("publicLock", "قفل عمومی")
   .string()
-  .regex(/^ssh-rsa /)
+  .regex(/[0-9]-/)
   .param("phone", "شماره موبایل")
   .string()
   .regex(/^09[0-9]{9}$/)
