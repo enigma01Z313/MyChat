@@ -74,7 +74,7 @@ sendMessage &&
     };
 
     doRequest(options, (res) => {
-      console.log(res);
+      // console.log(res);
       // if (user) localStorage.setItem("userData", JSON.stringify(user));
       // // console.log(user);
       // window.location.replace(`http://localhost:30000`);
@@ -82,3 +82,13 @@ sendMessage &&
   });
 
 const socket = io(siteUrl);
+
+socket.emit("joinRoom", localStorage.getItem("accessToken"));
+
+socket.on("logout", () => {
+  console.log("implement logout user");
+});
+
+socket.on("newMessage", (data) => {
+  console.log(data);
+});

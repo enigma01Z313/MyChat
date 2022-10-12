@@ -1,5 +1,5 @@
 const handleError = (err, req, res, next) => {
-  // console.log(err);
+  console.log(err);
   const errorTxtFa = err?.text ?? "خطای سرور";
   res.status(err.status ?? 500).json({
     error: {

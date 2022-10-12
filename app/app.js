@@ -1,5 +1,5 @@
-const express = require("express");
-const app = express();
+// const express = require("express");
+// const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -25,7 +25,7 @@ const staticRouter = require("./public/router");
 const handleError = require("./handleError");
 const handleCors = require("./handleCors");
 
-const myApp = (globalEmmiter) => {
+const myApp = (app, io) => {
   app.use(morgan("dev"));
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
@@ -34,14 +34,7 @@ const myApp = (globalEmmiter) => {
   app.set("view engine", "ejs");
   app.set("views", path.join(__dirname, "/public"));
 
-  app.use(
-    "/api",
-    (req, res, next) => {
-      res.globalEmmiter = globalEmmiter;
-      next();
-    },
-    apiRouter
-  );
+  app.use("/api", apiRouter(io));
   app.get("/*", staticRouter);
 
   //handling 404 ndpoints

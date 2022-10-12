@@ -1,11 +1,10 @@
-const socketServices = (globalEmmiter) => {
-  globalEmmiter.on("eventaa", () => {
-    console.log("an event occurred!");
-  });
+const { joinRoom } = require("./services");
+// const { User } = require("../api/db/mysql/models");
 
-  return (socket) => {
-    console.log(`new user connected to socket`);
-  };
+const socketServices = (socket) => {
+  // console.log(`new user connected to socket`);
+
+  socket.on("joinRoom", joinRoom(socket));
 };
 
 module.exports = socketServices;
