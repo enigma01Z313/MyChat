@@ -44,6 +44,12 @@ router.post(
   serveJson
 );
 
-// router.get("/:uuid", addMessage);
+router.get(
+  "/:uuid",
+  use(authentication),
+  use(authorization.def("CHATTER")),
+  use(getConversationByUuid),
+  serveJson
+);
 
 module.exports = router;

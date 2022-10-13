@@ -21,24 +21,28 @@ const addMessage = async (req, res, next) => {
       },
     },
     { new: true }
-  ).populate({
-    path: 'messages',
-    select: 'text sender',
-    options: {
-      sort: { createdAt: -1 },
-      limit: 2
-    }
-  })
-  // .select({ participents: 1, messages: 1 });
+  ).select({ participents: 1, messages: { $slice: -1 } });
 
-  console.log(conversation);
+  console.log(conversation._id);
 
-  for (const participent of conversation.participents) {
+  const {
+    messages: newMessage,
+    participents,
+    _id: conversationId,
+  } = conversation;
+  const { text: newText, sender: messageSender } = newMessage[0];
+
+  for (const participent of participents) {
     const { uuid } = participent;
-    io.to(uuid).emit("newMessage", "2222222333333");
-  }
+    const encryptedMessage = newText[uuid];
 
-  // io.to("aaaa").emit("newMessage", "2222222333333");
+    io.to(uuid).emit("newMessage", {
+      encryptedMessage,
+      conversationId,
+      messageSender,
+      title: messageSender
+    });
+  }
 
   return res.json(conversation);
 };

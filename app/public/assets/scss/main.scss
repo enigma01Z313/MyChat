@@ -94,4 +94,24 @@ body{
       }
     }
   }
+
+  #conversationsId{
+    opacity: 0;
+    visibility: hidden;
+
+    .concersationItem{
+      background: #fff;
+      padding: 10px 15px;
+      border-bottom: 2px solid #999;
+      cursor: pointer;
+    }
+  }
+
+  .messageItem{
+    text-align: right;
+
+    &.self{
+      text-align: left;
+    }
+  }
 }
