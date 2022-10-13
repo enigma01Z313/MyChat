@@ -1,4 +1,5 @@
-const siteUrl = "http://localhost:30000";
+// const siteUrl = "http://localhost:30000";
+const siteUrl = "https://mychat.farzinahmadi.com";
 const apiUrl = `${siteUrl}/api`;
 
 const defaultHeaders = {

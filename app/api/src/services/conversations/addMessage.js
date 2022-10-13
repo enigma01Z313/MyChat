@@ -1,7 +1,7 @@
 const { Conversation } = require("../../../db/mongoDb/");
 
 const addMessage = async (req, res, next) => {
-  const { uuid: id } = req.params;
+  const { uuid: _id } = req.params;
   const { messages, isReplyTo } = req.body;
   const {
     authenticatedUser: { uuid: sender },
@@ -10,7 +10,7 @@ const addMessage = async (req, res, next) => {
   } = res;
 
   const conversation = await Conversation.findOneAndUpdate(
-    { id },
+    { _id },
     {
       $push: {
         messages: {

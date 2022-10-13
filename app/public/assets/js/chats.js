@@ -88,7 +88,7 @@ sendMessage &&
       // console.log(res);
       // if (user) localStorage.setItem("userData", JSON.stringify(user));
       // // console.log(user);
-      // window.location.replace(`http://localhost:30000`);
+      // window.location.replace(`${siteUrl}`);
     });
   });
 

@@ -4,8 +4,8 @@
   const {status: {code}, publicLock} = loggedUser
 
   if(
-    window.location.href !== 'http://localhost:30000/setup' && 
+    window.location.href !== `${siteUrl}/setup` && 
     (code === 0 || publicLock === null))
-    return window.location.replace(`http://localhost:30000/setup`);
+    return window.location.replace(`${siteUrl}/setup`);
 })()
 </script>

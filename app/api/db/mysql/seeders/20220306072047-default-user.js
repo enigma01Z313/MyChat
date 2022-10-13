@@ -12,6 +12,7 @@ module.exports = {
       [
         {
           uuid: uuidv4(),
+          username: "f.ahmadyf94@gmail.com",
           phone: "09333950889",
           email: "f.ahmadyf94@gmail.com",
           password,

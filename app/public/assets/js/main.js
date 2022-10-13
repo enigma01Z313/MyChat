@@ -30,7 +30,7 @@ registerForm &&
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         localStorage.setItem("userData", JSON.stringify(user));
-        window.location.replace(`http://localhost:30000/${goto}`);
+        window.location.replace(`${siteUrl}/${goto}`);
       }
     );
   });
@@ -65,7 +65,7 @@ loginForm &&
         localStorage.setItem("refreshToken", refreshToken);
         localStorage.setItem("userData", JSON.stringify(user));
         localStorage.setItem("key", key);
-        window.location.replace(`http://localhost:30000/chats`);
+        window.location.replace(`${siteUrl}/chats`);
       }
     );
   });
