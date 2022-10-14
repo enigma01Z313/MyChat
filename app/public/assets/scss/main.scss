@@ -99,11 +99,26 @@ body{
     // opacity: 0;
     // visibility: hidden;
 
-    .concersationItem{
+    .conversationItem{
       background: #fff;
       padding: 10px 15px;
       border-bottom: 2px solid #999;
       cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+
+      span{
+        display: inline-block;
+
+        &.count{
+          width: 31px;
+          text-align: center;
+        }
+        &.title{
+          width: calc(100% - 31px);
+          overflow: hidden;
+        }
+      }
     }
   }
 

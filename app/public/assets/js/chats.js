@@ -1,58 +1,15 @@
+const chatsStore = new ChatsStore();
+
 const searchIds = document.getElementById("searchIds");
 const sendMessage = document.getElementById("sendMessage");
-const updateMessagesSection = (url) => {
-  // console.log(url);
-  document.getElementById("messages").innerHTML = "";
 
-  const method = "GET";
-  const data = {};
-
-  const options = {
-    url,
-    method,
-    headers: {
-      ...defaultHeaders,
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    },
-    data,
-  };
-
-  doRequest(options, async (response) => {
-    const { data } = response;
-
-    // console.log(data.messages);
-    for (message of data.messages) {
-      const { text, sender } = message;
-
-      const encryptedText = a2b64(text);
-      const privateKey = await importedPrivateKey(
-        a2b64(localStorage.getItem("key"))
-      );
-      const plainMessage = await decryptText(encryptedText, privateKey);
-      conversationsItems.createNewMessageDomItem(plainMessage, sender);
-    }
-
-    conversationsItems.setActiveConversation(data.id);
-    document
-      .getElementById("chatterSection")
-      .querySelector("header").innerText = `You are messaging ${data.title}`;
-    localStorage.setItem("participents", JSON.stringify(data.participents));
-    localStorage.setItem("conversationId", data.id);
-  });
-};
-
-const getConversationData = (e) => {
-  const targetConversationId = e.target.id;
-  const url = `${apiUrl}/conversations/${targetConversationId}`;
-  updateMessagesSection(url);
-};
-
-const conversationsItems = new ConvesationsItems();
+chatsStore.reqConversationsData();
+chatsStore.renderConversationList();
 
 //setup default user's own data
 const { id: userId, username } = JSON.parse(localStorage.getItem("userData"));
 document.getElementsByTagName("h1")[0].innerText += ` "${username}"`;
-console.log(userId);
+// console.log(userId);
 document.getElementById("ownId").value = userId;
 
 searchIds &&
@@ -61,7 +18,7 @@ searchIds &&
     const convesationTarget = searchIds.querySelector("[type='text']").value;
     const url = `${apiUrl}/conversations/setup/${convesationTarget}`;
 
-    updateMessagesSection(url);
+    chatsStore.searchConversation(url);
   });
 
 sendMessage &&
@@ -124,19 +81,24 @@ socket.on("logout", () => {
 
 socket.on(
   "newMessage",
-  async ({ encryptedMessage, conversationId, messageSender, title }) => {
+  async ({
+    encryptedMessage,
+    conversationId,
+    messageSender,
+    title,
+    messageId,
+  }) => {
     const encryptedText = a2b64(encryptedMessage);
     const privateKey = await importedPrivateKey(
       a2b64(localStorage.getItem("key"))
     );
     const plainMessage = await decryptText(encryptedText, privateKey);
-    console.log(plainMessage);
 
-    conversationsItems.add({
-      plainMessage,
-      conversationId,
-      messageSender,
-      title,
+    chatsStore.addNewMessageItem(messageId, {
+      text: plainMessage,
+      sender: messageSender,
     });
+
+    chatsStore.renderMessageList();
   }
 );

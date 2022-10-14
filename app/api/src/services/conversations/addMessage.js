@@ -23,8 +23,7 @@ const addMessage = async (req, res, next) => {
     { new: true }
   ).select({ participents: 1, messages: { $slice: -1 } });
 
-  console.log(conversation._id);
-
+  const messageId = conversation.messages[0]._id;
   const {
     messages: newMessage,
     participents,
@@ -40,7 +39,8 @@ const addMessage = async (req, res, next) => {
       encryptedMessage,
       conversationId,
       messageSender,
-      title: messageSender
+      title: messageSender,
+      messageId
     });
   }
 

@@ -14,7 +14,7 @@ const getDataByUUID = require("../src/middleware/getDataByUUID");
 const getDataList = require("../src/middleware/getDataList");
 const theSameUser = require("../src/middleware/theSameUser");
 
-const { updateUser, addUser } = require("../src/services");
+const { updateUser, getConversations } = require("../src/services");
 
 /**************************/
 /*   validation schemas   */
@@ -80,6 +80,15 @@ const updatedUserSchema = new ValidateF()
 //   use(getDataList("User", "کاربر", "Role")),
 //   serveJson
 // );
+
+router.get(
+  "/:uuid/conversations",
+  use(authentication),
+  use(theSameUser),
+  use(getDataByUUID("User", "کاربر", "Role")),
+  use(getConversations),
+  serveJson
+);
 
 router.get(
   "/:uuid",
