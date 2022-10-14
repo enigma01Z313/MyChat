@@ -2,16 +2,36 @@ const { Conversation } = require("../../../db/mongoDb/");
 
 const getConversationByUuid = async (req, res, next) => {
   const { uuid: _id } = req.params;
+  const {
+    authenticatedUser: { uuid: authedId },
+  } = res;
 
   const conversation = await Conversation.findOne({ _id }).select({
     messages: { $slice: -3 },
   });
 
-  console.log(conversation);
+  const ownMessages = [];
+  for (const message of conversation.messages) {
+    const { sender, isReplyTo, _id, createdAt, text } = message;
+    const ownText = text[authedId];
 
-  res.Conversation = conversation;
+    ownMessages.push({
+      _id,
+      sender,
+      isReplyTo,
+      text: ownText,
+      createdAt,
+    });
+  }
 
-  res.jsonData = conversation;
+  const finalConversation = Object.assign(conversation, {
+    messages: ownMessages,
+  });
+
+  res.Conversation = finalConversation;
+  res.conversation = finalConversation;
+
+  res.jsonData = finalConversation;
   next();
 };
 

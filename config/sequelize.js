@@ -2,9 +2,9 @@ const { dbHost, dbName, dbUser, dbPass, dbNameTest } = require("./dbMysql");
 
 module.exports = {
   development: {
-    username: 'chatUsr',
-    password: 'z&7#LSGEP47duGfXR&qn',
-    database: 'MyChatter',
+    username: dbUser,
+    password: dbPass,
+    database: dbName,
     host: dbHost,
     dialect: "mysql",
     operatorsAliases: "0",

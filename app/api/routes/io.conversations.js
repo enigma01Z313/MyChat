@@ -8,6 +8,7 @@ const authorization = require("../src/middleware/auth/authorization");
 const { ValidateF, validator } = require("../src/middleware/validate");
 const conversationHasBeenSetup = require("../src/middleware/conversation/conversationHasBeenSetup");
 const getConversationByUuid = require("../src/middleware/conversation/getConversationByUuid");
+const getConversationTitle = require("../src/middleware/conversation/getConversationTitle")
 
 const userById = require("../src/middleware/gets/userById");
 
@@ -49,6 +50,8 @@ router.get(
   use(authentication),
   use(authorization.def("CHATTER")),
   use(getConversationByUuid),
+  use(getConversationTitle),
+  use(getConversation),
   serveJson
 );
 

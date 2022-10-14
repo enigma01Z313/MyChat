@@ -1,8 +1,12 @@
 const getConversation = (req, res, next) => {
-  const {
-    conversation,
-    user: { fullName, username },
-  } = res;
+  const { conversation, user, conversationTitle } = res;
+  const { fullName, username } = user ?? {};
+
+  const title = conversationTitle
+    ? conversationTitle
+    : fullName.trim() !== ""
+    ? fullName
+    : username;
 
   res.jsonData = {
     id: conversation.id,
@@ -10,8 +14,9 @@ const getConversation = (req, res, next) => {
     participents: conversation.participents,
     messages: conversation.messages,
     createdAt: conversation.createdAt,
-    title: fullName.trim() !== "" ? fullName : username,
+    title,
   };
+
   next();
 };
 module.exports = getConversation;

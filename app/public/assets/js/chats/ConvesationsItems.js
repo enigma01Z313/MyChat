@@ -18,6 +18,7 @@ class ConvesationsItems {
     const item = this.list[conversationId];
     if (item) return item;
 
+    this.createNewConversationDomItem(conversationId);
     return {
       title: "",
       count: 0,
@@ -26,6 +27,7 @@ class ConvesationsItems {
 
   add({ conversationId, messageSender, title, plainMessage }) {
     const item = this.getItem(conversationId);
+    console.log("ConversationItems.add", item);
     const updatedItem = Object.assign(item, {
       count: item.count + 1,
       title,
