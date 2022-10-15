@@ -17,6 +17,8 @@ class ChatsStore {
 
   setActiveConversation(conversationId) {
     this.activeConversation.id = conversationId;
+
+    localStorage.setItem("conversationId", conversationId);
   }
 
   getActiveConversation() {
@@ -157,6 +159,8 @@ class ChatsStore {
       };
 
       doRequest(options, async ({ data }) => {
+        localStorage.setItem("participents", JSON.stringify(data.participents));
+
         const privateKey = await importedPrivateKey(
           a2b64(localStorage.getItem("key"))
         );
@@ -265,7 +269,6 @@ class ChatsStore {
     //fill message list with message items
     for (const [messageId, messageItem] of this.getActiveConversation()
       .messages) {
-
       //configure message element and it's classes
       const messageElem = document.createElement("div");
       messageElem.id = messageId;

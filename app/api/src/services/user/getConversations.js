@@ -8,9 +8,9 @@ const getConversations = async (req, res, next) => {
   if (!theSameUser) next(fError(401, "Access Denied", "عدم دسترسی"));
 
   const conversations = await Conversation.find({
-    "participents.uuid": "168daeed-c837-4616-8a1c-9d6ec492c674",
+    "participents.uuid": authenticatedUser.uuid,
   }).select("createdAt updatedAt isGroup participents");
-  // console.log(conversations);
+  console.log(conversations[0].participents);
   // return res.end("getting user's converations");
 
   res.jsonData = conversations;
