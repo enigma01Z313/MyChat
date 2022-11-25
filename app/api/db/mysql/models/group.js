@@ -1,14 +1,10 @@
 "use strict";
 
 module.exports = (sequelize, DataTypes) =>
-  sequelize.define("option", {
-    key: {
+  sequelize.define("group", {
+    name: {
       allowNull: false,
       type: DataTypes.STRING,
       unique: true,
-    },
-    value: {
-      allowNull: false,
-      type: DataTypes.STRING,
     },
   });

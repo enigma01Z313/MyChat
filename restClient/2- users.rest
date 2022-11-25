@@ -1,9 +1,13 @@
-@base = http://localhost:30000
+@base = http://localhost:30003
 @baseUrl = {{base}}/api/users
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1ZTRmY2YxLTZhMzEtNDgxZS05ZDU0LWRkNTcwZTQ2ZGNmYiIsInBob25lIjpudWxsLCJpYXQiOjE2NjUwNDc3NDcsImV4cCI6MTY2NTEzNzc0N30.IqBpSJ3-E3fli4WOHa1mQa6NOE18NmAHVCviNxWMBXQ
 
 ###
 //update a user's data
+GET {{baseUrl}}
+Content-Type: application/json
+
+###
 PUT {{baseUrl}}/55e4fcf1-6a31-481e-9d54-dd570e46dcfb
 Content-Type: application/json
 Authorization: Bearer {{token}}

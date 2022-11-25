@@ -1,51 +1,36 @@
 "use strict";
-const { Model } = require("sequelize");
-const getStatus = require("../staticDb/simpleStatus");
 
-module.exports = (sequelize, DataTypes) => {
-  class Role extends Model {
-    toJSON() {
-      return {
-        ...this.get(),
-        id: this.uuid,
-        permissions: JSON.parse(this.permissions),
-        status: getStatus(this.status),
-        uuid: undefined,
-      };
-    }
-
-    static associate(models) {
-      // define association here
-    }
-  }
-  Role.init(
-    {
-      uuid: {
-        allowNull: false,
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-      },
-      name: {
-        allowNull: false,
-        type: DataTypes.STRING,
-        unique: true,
-      },
-      permissions: {
-        allowNull: false,
-        type: DataTypes.STRING,
-        defaultValue: "",
-      },
-      status: {
-        allowNull: false,
-        type: DataTypes.STRING,
-        defaultValue: 1,
+module.exports = (sequelize, DataTypes) =>
+  sequelize.define("role", {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      get() {
+        return undefined;
       },
     },
-    {
-      sequelize,
-      tableName: "roles",
-      modelName: "Role",
-    }
-  );
-  return Role;
-};
+    uuid: {
+      allowNull: false,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    name: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      unique: true,
+    },
+    permissions: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      defaultValue: "",
+      get() {
+        return JSON.parse(this.getDataValue("permissions"));
+      },
+    },
+    status: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      defaultValue: 1,
+    },
+  });

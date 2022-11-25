@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "sass": "sass --watch ./app/public/assets/scss/main.scss:./app/public/assets/css/main.css  --style compressed",
+    "sqlReset": "node ./app/api/db/mysql/scripts/_reset.js",
+    "sqlSeed": "node ./app/api/db/mysql/scripts/_seed.js",
     "dev": "nodemon server.js",
     "server": "RUN_ENV=server nodemon server.js",
     "test": "jest --runInBand --detectOpenHandles --forceExit"

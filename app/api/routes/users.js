@@ -14,7 +14,7 @@ const getDataByUUID = require("../src/middleware/getDataByUUID");
 const getDataList = require("../src/middleware/getDataList");
 const theSameUser = require("../src/middleware/theSameUser");
 
-const { updateUser, getConversations } = require("../src/services");
+const { getUsers, updateUser, getConversations } = require("../src/services");
 
 /**************************/
 /*   validation schemas   */
@@ -71,46 +71,47 @@ const updatedUserSchema = new ValidateF()
 //   serveJson
 // );
 
+router.get(
+  "/",
+  use(getUsers),
+  // use(authentication),
+  // use(authorization.def("SEE_USERS")),
+  // filteredData({ id: { [Op.ne]: 1 } }),
+  // sortedData,
+  // use(getDataList("User", "کاربر", "Role")),
+  serveJson
+);
+
 // router.get(
-//   "/",
+//   "/:uuid/conversations",
 //   use(authentication),
-//   use(authorization.def("SEE_USERS")),
-//   filteredData({ id: { [Op.ne]: 1 } }),
-//   sortedData,
-//   use(getDataList("User", "کاربر", "Role")),
+//   use(theSameUser),
+//   use(getDataByUUID("User", "کاربر", "Role")),
+//   use(getConversations),
 //   serveJson
 // );
 
-router.get(
-  "/:uuid/conversations",
-  use(authentication),
-  use(theSameUser),
-  use(getDataByUUID("User", "کاربر", "Role")),
-  use(getConversations),
-  serveJson
-);
+// router.get(
+//   "/:uuid",
+//   use(authentication),
+//   use(theSameUser),
+//   use(authorization.def("SEE_USERS")),
+//   use(getDataByUUID("User", "کاربر", "Role")),
+//   serveJson
+// );
 
-router.get(
-  "/:uuid",
-  use(authentication),
-  use(theSameUser),
-  use(authorization.def("SEE_USERS")),
-  use(getDataByUUID("User", "کاربر", "Role")),
-  serveJson
-);
-
-router.put(
-  "/:uuid",
-  use(validator(updatedUserSchema)),
-  use(authentication),
-  use(theSameUser),
-  use(authorization.or(["SEE_USERS", "EDIT_USERS"])),
-  use(isUnique("User", "کاربر", "phone", "شماره موبایل")),
-  use(isUnique("User", "کاربر", "email", "ایمیل")),
-  use(doesExist("Role", "نقش کاربری", "roleId", "آیدی")),
-  use(getDataByUUID("User", "نقش کاربری", "Role")),
-  updateUser,
-  serveJson
-);
+// router.put(
+//   "/:uuid",
+//   use(validator(updatedUserSchema)),
+//   use(authentication),
+//   use(theSameUser),
+//   use(authorization.or(["SEE_USERS", "EDIT_USERS"])),
+//   use(isUnique("User", "کاربر", "phone", "شماره موبایل")),
+//   use(isUnique("User", "کاربر", "email", "ایمیل")),
+//   use(doesExist("Role", "نقش کاربری", "roleId", "آیدی")),
+//   use(getDataByUUID("User", "نقش کاربری", "Role")),
+//   updateUser,
+//   serveJson
+// );
 
 module.exports = router;
